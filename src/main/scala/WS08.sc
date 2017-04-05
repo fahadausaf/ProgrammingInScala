@@ -53,3 +53,72 @@ var sum2 = 0
 
 someNumbers2.foreach(sum2 += _)
 sum2
+
+
+def makeIncreaser(more: Int) = (x: Int) => x + more
+val inc1 = makeIncreaser(1)
+inc1(10)
+
+val inc9999 = makeIncreaser(9999)
+inc9999(10)
+
+/////////////////////////////////////////
+// REPEATED PARAMETERS///////////////////
+
+def echo(args: String*) =
+  for(arg <- args) println(arg)
+
+echo("Syed", "Fahad", "Ausaf", "Jafri")
+
+val arr = Array("What's", "up", "doc","?")
+echo(arr: _*)
+
+
+////////////////////////////////////////
+//// NAMED ARGUMENTS ///////////////////
+
+def speed(distance: Float, time: Float): Float =
+distance / time
+
+speed(100, 10)
+speed(distance = 100, time = 10)
+speed(time = 10, distance = 100)
+
+////////////////////////////////////////
+///////  DEFAULT PARAMETER VALUES //////
+
+//def printTime(out: java.io.PrintStream = Console.out) =
+  //out.println("time = " + System.currentTimeMillis()())
+
+//printTime(Console.err)
+
+////////////////////////////////////////
+/////////  TAIL RECURSION
+
+def boom(x: Int): Int =
+  if (x == 0) throw new Exception("Boom!")
+  else boom(x -1) + 1
+
+//boom(5)
+
+def bang(x: Int): Int =
+  if(x == 0) throw new Exception("bang!")
+  else bang(x -1)
+
+//bang(5)
+
+def isEven(x: Int): Boolean =
+  if(x == 0) true else isOdd(x-1)
+
+def isOdd(x: Int): Boolean =
+  if(x == 0) false else isEven(x -1)
+
+isEven(3)
+
+val funValue = nestedFun _
+def nestedFun(x: Int): Unit = {
+  if (x != 0) { println(x); funValue(x -1)}
+}
+
+funValue(4)
+
